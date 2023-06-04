@@ -32,29 +32,33 @@ export default async function handler(req, res) {
       message,
     };
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
-
-    const info = await transporter.sendMail({
-      from: "do_not_reply@northpole.com",
-      to: "santa@northpole.com",
-      subject: "New Santa Request",
-      text: `Child Username: ${response.username}\nChild Address: ${response.address}\nRequest: ${response.message}`,
-    });
-
-    console.log("Email sent:", info.messageId);
+    await sendEmail(response);
 
     return res.status(200).json(response);
   } catch (error) {
     console.error("Error submitting form:", error);
     return res.status(500).send("Internal Server Error");
   }
+}
+
+async function sendEmail(response) {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
+    },
+  });
+
+  const info = await transporter.sendMail({
+    from: "do_not_reply@northpole.com",
+    to: "santa@northpole.com",
+    subject: "New Santa Request",
+    text: `Child Username: ${response.username}\nChild Address: ${response.address}\nRequest: ${response.message}`,
+  });
+
+  console.log("Email sent:", info.messageId);
 }
 
 function isChildOlder10(birthdate) {
