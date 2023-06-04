@@ -36,8 +36,8 @@ export default async function handler(req, res) {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: "odie.herzog@ethereal.email",
-        pass: "Ag2ysJMN5Tpp6MjDDk",
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
       },
     });
 
