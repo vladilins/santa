@@ -5,12 +5,15 @@ import "./styles.css";
 export default function Home() {
   const [childId, setChildId] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (childId === "" || message === "") {
       return alert("Please fill all fields");
     }
+
+    setIsLoading(true);
 
     try {
       const response = await axios.post("/api/submit", { childId, message });
@@ -22,6 +25,8 @@ export default function Home() {
       alert(error.response.data);
       console.error("Error submitting form:", error);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -31,15 +36,15 @@ export default function Home() {
       </header>
 
       <main>
-        <p className="bold">Ho ho ho, what you want for Christmas?</p>
-        who are you?
+        <p className="bold">Ho ho ho, what do you want for Christmas?</p>
+        Who are you?
         <input
           name="userid"
           placeholder="charlie.brown"
           onChange={(e) => setChildId(e.target.value)}
         />
         <form onSubmit={handleSubmit}>
-          what do you want for christmas?
+          What do you want for Christmas?
           <textarea
             name="wish"
             rows="10"
@@ -48,8 +53,8 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
           <br />
-          <button type="submit" id="submit-letter">
-            Send
+          <button type="submit" id="submit-letter" disabled={isLoading}>
+            {isLoading ? "Sending..." : "Send"}
           </button>
         </form>
       </main>
