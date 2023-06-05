@@ -1,7 +1,11 @@
 import axios from "axios";
 import nodemailer from "nodemailer";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { childId, message } = req.body;
 
   try {
@@ -15,12 +19,16 @@ export default async function handler(req, res) {
     const users = userResponse.data;
     const profiles = profileResponse.data;
 
-    const user = users.find((u) => u.username === childId);
+    const user = users.find(
+      (u: { username: string }) => u.username === childId
+    );
 
     if (!user) {
       return res.status(400).json("Child is not registered");
     }
-    const profile = profiles.find((p) => p.userUid === user.uid);
+    const profile = profiles.find(
+      (p: { userUid: string }) => p.userUid === user.uid
+    );
 
     if (isChildOlder10(profile.birthdate)) {
       return res.status(400).json("Child more than 10 years old");
@@ -41,7 +49,11 @@ export default async function handler(req, res) {
   }
 }
 
-async function sendEmail(response) {
+async function sendEmail(response: {
+  username: string;
+  address: string;
+  message: string;
+}) {
   const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
@@ -61,7 +73,7 @@ async function sendEmail(response) {
   console.log("Email sent:", info.messageId);
 }
 
-function isChildOlder10(birthdate) {
+function isChildOlder10(birthdate: string) {
   const today = new Date();
   const birthDate = new Date(birthdate);
   const ageDiff = today.getFullYear() - birthDate.getFullYear();

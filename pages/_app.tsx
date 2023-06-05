@@ -7,7 +7,7 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (childId === "" || message === "") {
       return alert("Please fill all fields");
@@ -21,7 +21,7 @@ export default function Home() {
       if (response.status === 200) {
         alert("Success! Your request has been received.");
       }
-    } catch (error) {
+    } catch (error: any) {
       alert(error.response.data);
       console.error("Error submitting form:", error);
     }
@@ -47,8 +47,8 @@ export default function Home() {
           What do you want for Christmas?
           <textarea
             name="wish"
-            rows="10"
-            cols="45"
+            rows={10}
+            cols={45}
             placeholder="Gifts!"
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
