@@ -59,11 +59,15 @@ Website URL: [https://santa-gold.vercel.app](https://santa-gold.vercel.app)
 
 ## Comments
 
-I have added Axios becouse
+I have added Axios because
 
 1. It has good defaults to work with JSON data.
 2. It has function names that match any HTTP methods.
 3. It does more with less code.
 4. It has better error handling.
 
-I have added Typescript becouse TypeScript can help you avoid many problems with dynamic types in JavaScript, such as bugs, errors, and readability issues TypeScript can also provide better development tools for JavaScript IDEs and practices, such as static checking, code completion, and refactoring
+I have added Typescript because TypeScript can help you avoid many problems with dynamic types in JavaScript, such as bugs, errors, and readability issues TypeScript can also provide better development tools for JavaScript IDEs and practices, such as static checking, code completion, and refactoring
+
+This instrumentations are not clear -- Every 15seconds, the server should send an email with information on all pending (not yet sent) requests including
+
+I send email on every submit insted
