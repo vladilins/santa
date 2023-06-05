@@ -2,7 +2,29 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+1. Install the requirements
+
+   ```bash
+   $ npm install
+   ```
+
+2. Make a copy of the example environment variables file
+
+   On Linux systems:
+
+   ```bash
+   $ cp .env.example .env
+   ```
+
+   On Windows:
+
+   ```powershell
+   $ copy .env.example .env
+   ```
+
+3. Add your environment variables to the newly created `.env` file from [this link](https://ethereal.email/create)
+
+4. Run the development server:
 
 ```bash
 npm run dev
@@ -32,3 +54,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Website URL: [https://santa-gold.vercel.app](https://santa-gold.vercel.app)
+
+## Comments
+
+I have added Axios becouse
+
+1. It has good defaults to work with JSON data.
+2. It has function names that match any HTTP methods.
+3. It does more with less code.
+4. It has better error handling.
+
+I have added Typescript becouse TypeScript can help you avoid many problems with dynamic types in JavaScript, such as bugs, errors, and readability issues TypeScript can also provide better development tools for JavaScript IDEs and practices, such as static checking, code completion, and refactoring
